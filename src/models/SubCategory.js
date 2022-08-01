@@ -1,4 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
+const { Schema } = mongoose;
 
 const SubCategorySchema = new Schema({
     name: {
@@ -12,6 +13,18 @@ const SubCategorySchema = new Schema({
     thumbnail: {
         type: String,
         require: true,
+    },
+    price: {
+        type: Number,
+        require: true
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    categoryId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
     },
     userId: {
         type: Schema.Types.ObjectId,

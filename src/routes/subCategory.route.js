@@ -6,8 +6,8 @@ import {
     create,
     update,
     remove
-} from "../controllers/category.controller.js";
-import { create as createValidator } from '../validators/category.validator.js';
+} from "../controllers/subCategory.controller.js";
+import { create as createValidator } from '../validators/subCategory.validator.js';
 import uploadSingleUltil from "../ultils/uploadSingle.ultil.js";
 
 Router.get("/", list)

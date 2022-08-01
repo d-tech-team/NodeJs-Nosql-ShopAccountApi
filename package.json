@@ -20,9 +20,22 @@
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-route-group": "^1.0.8",
+    "express-group-routes": "^1.1.0",
     "express-validator": "^6.14.2",
+    "module-alias": "^2.2.2",
     "mongoose": "^6.4.7",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@config": "src/config",
+    "@controllers": "src/controllers",
+    "@models": "src/models",
+    "@routes": "src/routes",
+    "@utils": "src/utils",
+    "@validator": "src/validator"
   }
 }

@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
-dotenv.config();
+import 'dotenv'
 import express from "express";
-import database from "./config/database.js";
-import expressRouterGroup from "express-router-group";
 const app = express();
+import "./config/database.js";
 
 const { PORT } = process.env;
 

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+ 
 try {
     mongoose.connect('mongodb://localhost:27017/d-shop', {
         useNewUrlParser: true,
