@@ -1,7 +1,7 @@
 import CategoryModel from "../models/Category.js";
 import { validationResult } from "express-validator";
-import { removeFile } from "../ultils/removeFile.ultil.js";
-import { createSlug } from "../ultils/createSlug.ultil.js";
+import { removeFile } from "../utils/removeFile.util.js";
+import { createSlug } from "../utils/createSlug.util.js";
 
 export const list = async (req, res) => {
     try {
@@ -57,11 +57,11 @@ export const create = async (req, res) => {
     }
     const { name } = req.body;
     try {
-        CategoryModel.create({
+       await CategoryModel.create({
             name,
             slug: createSlug(name),
             thumbnail: req.file.filename,
-            userId: '4eb6e7e7e9b7f4194e000001'
+            userId: req.user._id
         });
         return res.status(201).json({
             success: true,
@@ -101,7 +101,7 @@ export const update = async (req, res) => {
                 name,
                 slug: createSlug(name),
                 thumbnail: req.file.filename,
-                userId: '4eb6e7e7e9b7f4194e000001'
+                userId: req.user._id
             }
             removeFile(category.thumbnail);
         }

@@ -12,11 +12,11 @@ const SubCategorySchema = new Schema({
     },
     thumbnail: {
         type: String,
-        require: true,
+        require: false,
     },
     price: {
         type: Number,
-        require: true
+        require: false
     },
     type: {
         type: String,

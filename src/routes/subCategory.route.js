@@ -8,15 +8,16 @@ import {
     remove
 } from "../controllers/subCategory.controller.js";
 import { create as createValidator } from '../validators/subCategory.validator.js';
-import uploadSingleUltil from "../ultils/uploadSingle.ultil.js";
+import uploadSingleUltil from "../utils/uploadSingle.util.js";
+import { isLogin, isAdmin } from '../middlewares/permission.middleware.js';
 
 Router.get("/", list)
 
 Router.get("/:id", get)
 
-Router.post("/", uploadSingleUltil, create)
+Router.post("/", isLogin, isAdmin, uploadSingleUltil, createValidator(), create)
 
-Router.patch("/:id", uploadSingleUltil, update)
+Router.patch("/:id", uploadSingleUltil, createValidator(), update)
 
 Router.delete("/:id", remove)
 

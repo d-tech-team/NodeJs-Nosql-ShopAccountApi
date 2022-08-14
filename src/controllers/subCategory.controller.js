@@ -1,12 +1,21 @@
 import SubCategoryModel from "../models/SubCategory.js";
 import CategoryModel from "../models/Category.js";
 import { validationResult } from "express-validator";
-import { removeFile } from "../ultils/removeFile.ultil.js";
-import { createSlug } from "../ultils/createSlug.ultil.js";
+import { removeFile } from "../utils/removeFile.util.js";
+import { createSlug } from "../utils/createSlug.util.js";
 
 export const list = async (req, res) => {
     try {
-        const list = await SubCategoryModel.find({});
+        let list = await SubCategoryModel.find({});
+
+        list = await Promise.all(list.map(async (item) => {
+            const category = await CategoryModel.findById(item.categoryId);
+            return {
+                ...item._doc,
+                category
+            }
+        }))
+
         return res.status(200).json({
             success: true,
             data: list
@@ -79,7 +88,7 @@ export const create = async (req, res) => {
                 price,
                 type,
                 categoryId,
-                userId: '4eb6e7e7e9b7f4194e000001',
+                userId: req.user._id,
             }
         }
         else {
@@ -89,11 +98,11 @@ export const create = async (req, res) => {
                 thumbnail: req.file.filename,
                 type,
                 categoryId,
-                userId: '4eb6e7e7e9b7f4194e000001',
+                userId: req.user._id,
             }
         }
 
-        SubCategoryModel.create(data)
+        await SubCategoryModel.create(data)
         return res.status(201).json({
             success: true,
             data: "Create sub category success"
@@ -148,7 +157,7 @@ export const update = async (req, res) => {
                     thumbnail: req.file.filename,
                     price,
                     categoryId,
-                    userId: '4eb6e7e7e9b7f4194e000001',
+                    userId: req.user._id,
                 }
             }
             else {
@@ -157,7 +166,7 @@ export const update = async (req, res) => {
                     slug: createSlug(name),
                     thumbnail: req.file.filename,
                     categoryId,
-                    userId: '4eb6e7e7e9b7f4194e000001',
+                    userId: req.user._id,
                 }
             }
             removeFile(subCategory.thumbnail);
@@ -169,7 +178,7 @@ export const update = async (req, res) => {
                     slug: createSlug(name),
                     price,
                     categoryId,
-                    userId: '4eb6e7e7e9b7f4194e000001',
+                    userId: req.user._id,
                 }
             }
             else {
@@ -177,7 +186,7 @@ export const update = async (req, res) => {
                     name,
                     slug: createSlug(name),
                     categoryId,
-                    userId: '4eb6e7e7e9b7f4194e000001',
+                    userId: req.user._id,
                 }
             }
         }

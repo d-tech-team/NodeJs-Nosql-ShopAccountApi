@@ -1,12 +1,11 @@
-import 'dotenv'
+import 'dotenv/config'
+import 'module-alias/register.js'
 import express from "express";
+import 'express-group-routes'
+import { currentDate, currentTime } from './utils/date.util.js'
 const app = express();
-import "./config/database.js";
 
-const { PORT } = process.env;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`)
-})
+app.use('./uploads/', express.static('uploads'));
 
 export default app;

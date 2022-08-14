@@ -12,7 +12,7 @@ const AccountSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
+        required: false,
     },
     type: {
         type: String,
@@ -20,7 +20,7 @@ const AccountSchema = new Schema({
     },
     price: {
         type: Number,
-        require: true
+        require: false
     },
     subCategoryId: {
         type: Schema.Types.ObjectId,
