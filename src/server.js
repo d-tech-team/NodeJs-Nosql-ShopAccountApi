@@ -7,6 +7,7 @@ import CategoryRouter from './routes/category.route.js';
 import SubCategoryRouter from './routes/subCategory.route.js';
 import AccountRouter from './routes/account.route.js';
 import AuthRouter from './routes/auth.route.js';
+import HistoryBuyRouter from './routes/historyBuy.route.js';
 import "./config/database.js";
 import './utils/passport.util.js';
 const { PORT } = process.env;
@@ -33,6 +34,7 @@ app.group('/api', (router) => {
     router.use('/subcategories', SubCategoryRouter);
     router.use('/accounts', AccountRouter);
     router.use('/auth', AuthRouter);
+    router.use('/buy', HistoryBuyRouter);
 })
 
 app.listen(PORT, () => {
